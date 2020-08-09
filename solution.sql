@@ -110,3 +110,32 @@ from TVS
 order by formatted_date;
 
 select * from TVS1;
+
+create table Master
+(
+Date date primary key,
+Bajaj double,
+TCS double,
+TVS double,
+Infosys double,
+Eicher double,
+Hero double
+);
+
+insert into Master
+select 
+b.Date, b.Close_Price, tcs.Close_Price, tvs.Close_Price, 
+i.Close_Price, e.Close_Price, h.Close_Price
+from Bajaj1 b
+join TCS1 tcs
+on b.Date = tcs.Date
+join TVS1 tvs
+on b.Date = tvs.Date
+join Infosys1 i
+on b.Date = i.Date
+join Eicher1 e
+on b.Date = e.Date
+join Hero1 h
+on b.Date = h.Date;
+
+select * from Master;
