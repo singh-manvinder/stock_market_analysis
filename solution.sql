@@ -238,7 +238,234 @@ Close_Price double,
 insert into Bajaj2
 select Date, Close_Price, `Signal` from Bajajx;
 
-select * from Bajaj2
+select * from Bajaj2;
 
+/* Eicher*/
 
+create table Eicherx
+(
+Date Date primary key,
+Close_Price double,
+20_Day_MA double,
+50_Day_MA double,
+Flag double,
+`Row` int,
+`Signal` nvarchar(10)
+);
 
+insert into Eicherx
+select *, 20_Day_MA - 50_Day_MA, row_number() over (order by Date), 'Hold' from Eicher1;
+
+alter table Eicherx 
+add Flagp double;
+
+update Eicherx curr
+join Eicherx prv
+on curr.Row = prv.Row - 1 
+set prv.Flagp = curr.Flag;
+
+update Eicherx
+set `Signal` = 'Buy'
+where Flag > 0 and Flagp < 0;
+
+update Eicherx
+set `Signal` = 'Sell'
+where Flag < 0 and Flagp > 0;
+
+select * from Eicherx;
+
+create table Eicher2
+(
+Date Date,
+Close_Price double,
+`Signal` nvarchar(10)
+);
+
+insert into Eicher2
+select Date, Close_Price, `Signal` from Eicherx;
+
+select * from Eicher2;
+
+/* Hero */
+
+create table Herox
+(
+Date Date primary key,
+Close_Price double,
+20_Day_MA double,
+50_Day_MA double,
+Flag double,
+`Row` int,
+`Signal` nvarchar(10)
+);
+
+insert into Herox
+select *, 20_Day_MA - 50_Day_MA, row_number() over (order by Date), 'Hold' from Hero1;
+
+alter table Herox 
+add Flagp double;
+
+update Herox curr
+join Herox prv
+on curr.Row = prv.Row - 1 
+set prv.Flagp = curr.Flag;
+
+update Herox
+set `Signal` = 'Buy'
+where Flag > 0 and Flagp < 0;
+
+update Herox
+set `Signal` = 'Sell'
+where Flag < 0 and Flagp > 0;
+
+select * from Herox;
+
+create table Hero2
+(
+Date Date,
+Close_Price double,
+`Signal` nvarchar(10)
+);
+
+insert into Hero2
+select Date, Close_Price, `Signal` from Herox;
+
+select * from Hero2;
+
+/* Infosys */
+
+create table Infosysx
+(
+Date Date primary key,
+Close_Price double,
+20_Day_MA double,
+50_Day_MA double,
+Flag double,
+`Row` int,
+`Signal` nvarchar(10)
+);
+
+insert into Infosysx
+select *, 20_Day_MA - 50_Day_MA, row_number() over (order by Date), 'Hold' from Infosys1;
+
+alter table Infosysx 
+add Flagp double;
+
+update Infosysx curr
+join Infosysx prv
+on curr.Row = prv.Row - 1 
+set prv.Flagp = curr.Flag;
+
+update Infosysx
+set `Signal` = 'Buy'
+where Flag > 0 and Flagp < 0;
+
+update Infosysx
+set `Signal` = 'Sell'
+where Flag < 0 and Flagp > 0;
+
+select * from Infosysx;
+
+create table Infosys2
+(
+Date Date,
+Close_Price double,
+`Signal` nvarchar(10)
+);
+
+insert into Infosys2
+select Date, Close_Price, `Signal` from Infosysx;
+
+select * from Infosys2;
+
+/* TCS */
+
+create table TCSx
+(
+Date Date primary key,
+Close_Price double,
+20_Day_MA double,
+50_Day_MA double,
+Flag double,
+`Row` int,
+`Signal` nvarchar(10)
+);
+
+insert into TCSx
+select *, 20_Day_MA - 50_Day_MA, row_number() over (order by Date), 'Hold' from TCS1;
+
+alter table TCSx 
+add Flagp double;
+
+update TCSx curr
+join TCSx prv
+on curr.Row = prv.Row - 1 
+set prv.Flagp = curr.Flag;
+
+update TCSx
+set `Signal` = 'Buy'
+where Flag > 0 and Flagp < 0;
+
+update TCSx
+set `Signal` = 'Sell'
+where Flag < 0 and Flagp > 0;
+
+select * from TCSx;
+
+create table TCS2
+(
+Date Date,
+Close_Price double,
+`Signal` nvarchar(10)
+);
+
+insert into TCS2
+select Date, Close_Price, `Signal` from TCSx;
+
+select * from TCS2;
+
+/* TVS */
+
+create table TVSx
+(
+Date Date primary key,
+Close_Price double,
+20_Day_MA double,
+50_Day_MA double,
+Flag double,
+`Row` int,
+`Signal` nvarchar(10)
+);
+
+insert into TVSx
+select *, 20_Day_MA - 50_Day_MA, row_number() over (order by Date), 'Hold' from TVS1;
+
+alter table TVSx 
+add Flagp double;
+
+update TVSx curr
+join TVSx prv
+on curr.Row = prv.Row - 1 
+set prv.Flagp = curr.Flag;
+
+update TVSx
+set `Signal` = 'Buy'
+where Flag > 0 and Flagp < 0;
+
+update TVSx
+set `Signal` = 'Sell'
+where Flag < 0 and Flagp > 0;
+
+select * from TVSx;
+
+create table TVS2
+(
+Date Date,
+Close_Price double,
+`Signal` nvarchar(10)
+);
+
+insert into TVS2
+select Date, Close_Price, `Signal` from TVSx;
+
+select * from TVS2
