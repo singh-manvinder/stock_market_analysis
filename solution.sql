@@ -178,6 +178,7 @@ order by formatted_date;
 select * from TVS1;
 
 /* Delete the null data (data of first 50 days) as we don't have to do analysis on that*/
+/* Safe update or delete should be off in preferences */
 
 delete from Bajaj1 where 50_Day_MA is null;
 delete from Eicher1 where 50_Day_MA is null;
@@ -509,5 +510,76 @@ delimiter ;
 
 select fn_get_signal('11-July-2018');
 
+/* Analysis */
+
+/* Dates on which you should buy stock and which stock*/
+select *, 'Bajaj' as Stock
+from Bajaj2 where `Signal` = 'Buy'
+union 
+select *, 'Eicher' as Stock
+from Eicher2 where `Signal` = 'Buy'
+union 
+select *, 'Hero' as Stock
+from Hero2 where `Signal` = 'Buy'
+union 
+select *, 'Infosys' as Stock
+from Infosys2 where `Signal` = 'Buy'
+union 
+ select *, 'TCS' as Stock
+from TCS2 where `Signal` = 'Buy'
+union 
+select *, 'TVS' as Stock
+from TVS2 where `Signal` = 'Buy';
 
 
+/* Dates on which you should sell stocks and which stock */
+select *, 'Bajaj' as Stock
+from Bajaj2 where `Signal` = 'Sell'
+union 
+select *, 'Eicher' as Stock
+from Eicher2 where `Signal` = 'Sell'
+union 
+select *, 'Hero' as Stock
+from Hero2 where `Signal` = 'Sell'
+union 
+select *, 'Infosys' as Stock
+from Infosys2 where `Signal` = 'Sell'
+union 
+ select *, 'TCS' as Stock
+from TCS2 where `Signal` = 'Sell'
+union 
+select *, 'TVS' as Stock
+from TVS2 where `Signal` = 'Sell';
+
+/* Activity per stock */
+
+select Stock, count(*) as `Action (Buy/Sell)` from 
+(select *, 'Bajaj' as Stock
+from Bajaj2 where `Signal` = 'Sell' or `Signal` = 'Buy'
+union 
+select *, 'Eicher' as Stock
+from Eicher2 where `Signal` = 'Sell'
+union 
+select *, 'Hero' as Stock
+from Hero2 where `Signal` = 'Sell'
+union 
+select *, 'Infosys' as Stock
+from Infosys2 where `Signal` = 'Sell'
+union 
+ select *, 'TCS' as Stock
+from TCS2 where `Signal` = 'Sell'
+union 
+select *, 'TVS' as Stock
+from TVS2 where `Signal` = 'Sell') t1
+group by Stock
+order by `Action (Buy/Sell)` desc;
+
+/* Spread of each stock */
+select 
+round(max(Bajaj) - min(Bajaj), 2) Bajaj,
+round(max(Eicher) - min(Eicher), 2) Eicher,
+round(max(Hero) - min(Hero), 2) Hero,
+round(max(Infosys) - min(Infosys), 2) Infosys,
+round(max(TCS) - min(TCS), 2) TCS,
+round(max(TVS) - min(TVS), 2) TVS
+from Master
