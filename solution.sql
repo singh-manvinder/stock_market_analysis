@@ -498,15 +498,16 @@ select * from TVS2;
 /* 4. Create a User defined function, that takes the date as input and returns the signal for that particular day (Buy/Sell/Hold) for the Bajaj stock. */
 
 delimiter $$
-create function fn_get_signal(inp_date date)  
+create function fn_get_signal(inp_date nvarchar(100))  
 returns nvarchar(10) reads sql data
 begin
 	declare val nvarchar(10);
-	set val = (select `signal` from Bajaj2 where Date = inp_date limit 1);
+	set val = (select `signal` from Bajaj2 where Date = str_to_date(inp_date, '%d-%M-%Y') limit 1);
     return val;
 end; $$
 delimiter ;
 
-select fn_get_signal('2015-03-13')
+select fn_get_signal('11-July-2018');
+
 
 
