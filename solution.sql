@@ -28,13 +28,12 @@ insert into Bajaj1
 select str_to_date(date, '%d-%M-%Y') as formatted_date, `Close Price`,
 (case when
 	row_number() over (order by str_to_date(date, '%d-%M-%Y')) >= 20 then
-		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') 
-        rows between 20 preceding and current row)
+		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') rows 19 preceding)
 	else null
 end),
 (case when
 	row_number() over (order by str_to_date(date, '%d-%M-%Y')) >= 50 then
-		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') rows 50 preceding)
+		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') rows 49 preceding)
 	else null
 end)
 from Bajaj
@@ -56,12 +55,12 @@ insert into Eicher1
 select str_to_date(date, '%d-%M-%Y') as formatted_date, `Close Price`,
 (case when
 	row_number() over (order by str_to_date(date, '%d-%M-%Y')) >= 20 then
-		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') rows 20 preceding)
+		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') rows 19 preceding)
 	else null
 end),
 (case when
 	row_number() over (order by str_to_date(date, '%d-%M-%Y')) >= 50 then
-		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') rows 50 preceding)
+		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') rows 49 preceding)
 	else null
 end)
 from Eicher
@@ -83,12 +82,12 @@ insert into Hero1
 select str_to_date(date, '%d-%M-%Y') as formatted_date, `Close Price`,
 (case when
 	row_number() over (order by str_to_date(date, '%d-%M-%Y')) >= 20 then
-		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') rows 20 preceding)
+		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') rows 19 preceding)
 	else null
 end),
 (case when
 	row_number() over (order by str_to_date(date, '%d-%M-%Y')) >= 50 then
-		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') rows 50 preceding)
+		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') rows 49 preceding)
 	else null
 end)
 from Hero
@@ -110,12 +109,12 @@ insert into Infosys1
 select str_to_date(date, '%d-%M-%Y') as formatted_date, `Close Price`,
 (case when
 	row_number() over (order by str_to_date(date, '%d-%M-%Y')) >= 20 then
-		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') rows 20 preceding)
+		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') rows 19 preceding)
 	else null
 end),
 (case when
 	row_number() over (order by str_to_date(date, '%d-%M-%Y')) >= 50 then
-		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') rows 50 preceding)
+		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') rows 49 preceding)
 	else null
 end)
 from Infosys
@@ -137,12 +136,12 @@ insert into TCS1
 select str_to_date(date, '%d-%M-%Y') as formatted_date, `Close Price`,
 (case when
 	row_number() over (order by str_to_date(date, '%d-%M-%Y')) >= 20 then
-		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') rows 20 preceding)
+		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') rows 19 preceding)
 	else null
 end),
 (case when
 	row_number() over (order by str_to_date(date, '%d-%M-%Y')) >= 50 then
-		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') rows 50 preceding)
+		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') rows 49 preceding)
 	else null
 end)
 from TCS
@@ -164,12 +163,12 @@ insert into TVS1
 select str_to_date(date, '%d-%M-%Y') as formatted_date, `Close Price`,
 (case when
 	row_number() over (order by str_to_date(date, '%d-%M-%Y')) >= 20 then
-		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') rows 20 preceding)
+		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') rows 19 preceding)
 	else null
 end),
 (case when
 	row_number() over (order by str_to_date(date, '%d-%M-%Y')) >= 50 then
-		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') rows 50 preceding)
+		avg(`Close Price`) over (order by str_to_date(date, '%d-%M-%Y') rows 49 preceding)
 	else null
 end)
 from TVS
