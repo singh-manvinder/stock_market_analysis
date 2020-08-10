@@ -195,3 +195,50 @@ join Hero1 h
 on b.Date = h.Date;
 
 select * from Master;
+
+create table Bajajx
+(
+Date Date primary key,
+Close_Price double,
+20_Day_MA double,
+50_Day_MA double,
+Flag double,
+`Row` int,
+`Signal` nvarchar(10)
+);
+
+insert into Bajajx
+select *, 20_Day_MA - 50_Day_MA, row_number() over (order by Date), 'Hold' from Bajaj1;
+
+alter table Bajajx 
+add Flagp double;
+
+update Bajajx curr
+join Bajajx prv
+on curr.Row = prv.Row - 1 
+set prv.Flagp = curr.Flag;
+
+update Bajajx
+set `Signal` = 'Buy'
+where Flag > 0 and Flagp < 0;
+
+update Bajajx
+set `Signal` = 'Sell'
+where Flag < 0 and Flagp > 0;
+
+select * from Bajajx;
+
+create table Bajaj2
+(
+Date Date,
+Close_Price double,
+`Signal` nvarchar(10)
+);
+
+insert into Bajaj2
+select Date, Close_Price, `Signal` from Bajajx;
+
+select * from Bajaj2
+
+
+
