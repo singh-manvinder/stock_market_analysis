@@ -1,7 +1,11 @@
+/* Create a new schema named 'Assignment' */
 create database Assignment;
 
 use Assignment;
 
+/* After this csv has been importe manually using mysql workbench tool */
+
+/* Check imported data */
 select * from Bajaj;
 select * from Eicher;
 select * from Hero;
@@ -9,6 +13,9 @@ select * from Infosys;
 select * from TCS;
 select * from TVS;
 
+/* 1. Create a new table named 'bajaj1' containing the date, close price, 20 Day MA and 50 Day MA. (This has to be done for all 6 stocks) */
+
+/* Create Bajaj1 */
 create table Bajaj1
 (
 Date Date primary key,
@@ -35,6 +42,8 @@ order by formatted_date;
 
 select * from Bajaj1;
 
+/* Create Eicher1 */
+
 create table Eicher1
 (
 Date Date primary key,
@@ -59,6 +68,8 @@ from Eicher
 order by formatted_date;
 
 select * from Eicher1;
+
+/* Create Hero1 */
 
 create table Hero1
 (
@@ -85,6 +96,8 @@ order by formatted_date;
 
 select * from Hero1;
 
+/* Create Infosys1 */
+
 create table Infosys1
 (
 Date Date primary key,
@@ -109,6 +122,8 @@ from Infosys
 order by formatted_date;
 
 select * from Infosys1;
+
+/* Create TCS1 */
 
 create table TCS1
 (
@@ -135,6 +150,8 @@ order by formatted_date;
 
 select * from TCS1;
 
+/* Create TVS1 */
+
 create table TVS1
 (
 Date Date primary key,
@@ -160,12 +177,16 @@ order by formatted_date;
 
 select * from TVS1;
 
+/* Delete the null data (data of first 50 days) as we don't have to do analysis on that*/
+
 delete from Bajaj1 where 50_Day_MA is null;
 delete from Eicher1 where 50_Day_MA is null;
 delete from Hero1 where 50_Day_MA is null;
 delete from Infosys1 where 50_Day_MA is null;
 delete from TCS1 where 50_Day_MA is null;
 delete from TVS1 where 50_Day_MA is null;
+
+/* 2. Create a master table containing the date and close price of all the six stocks. (Column header for the price is the name of the stock) */
 
 create table Master
 (
@@ -195,6 +216,10 @@ join Hero1 h
 on b.Date = h.Date;
 
 select * from Master;
+
+/* 3. Use the table created in Part(1) to generate buy and sell signal. Store this in another table named 'bajaj2'. Perform this operation for all stocks. */
+
+/* Creating intermetidate table {Stock}x */
 
 create table Bajajx
 (
